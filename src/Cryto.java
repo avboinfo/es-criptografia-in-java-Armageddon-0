@@ -1,29 +1,28 @@
 public class Cryto {
 
-    static protected String Cesar(String data, int shift) {
-        StringBuilder output = new StringBuilder(data.length());
-        for (char singleChar : data.toCharArray()) {
-            int shiftedChar = (int) (singleChar + shift) % 256;
+    static public String Cesar(String data, int shift) {
+        StringBuilder output = new StringBuilder(data.length()); //genera nuova stringa 
+        for (char singleChar : data.toCharArray()) {             //creo un array di char prendendo 1 caratere alla volta
+            int shiftedChar = (int) (singleChar + shift) % 256;  
             output.append((char) shiftedChar);
         }
         return output.toString();
     }
 
-    static private String xorAlgo(String data, String key) {
+    static public String xorAlgo(String data,String key) {
 
-        String acc = "";
+        StringBuilder result= new StringBuilder();
 
         for (int i = 0; i < data.length(); i++) {
-            char d = data.charAt(i);
+            char inputChar = data.charAt(i);
+            char keyChar = key.charAt(i % key.length());
+            //XOR operazione
+            char encryptedChar=(char) (inputChar^keyChar);
 
-            for (int j = 0; j < key.length(); j++) {
-                char k = key.charAt(j);
-
-                char xorChar = (char) (d ^ k);
-                acc = acc + xorChar;
+            result.append(encryptedChar);
             }
+            return result.toString();
         }
 
-        return acc;
     }
-}
+
